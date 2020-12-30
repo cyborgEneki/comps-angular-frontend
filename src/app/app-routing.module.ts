@@ -4,7 +4,7 @@ import { MenuSidenavComponent } from '../app/menu-sidenav/menu-sidenav.component
 import { EditInitiativeComponent } from '../app/edit-initiative/edit-initiative.component';
 
 const routes: Routes = [
-  { path: 'home', component: MenuSidenavComponent },
+  { path: '', component: MenuSidenavComponent },
   { path: 'edit-initiative', component: EditInitiativeComponent }
 ];
 

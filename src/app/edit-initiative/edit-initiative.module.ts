@@ -8,6 +8,7 @@ import { EditInitiativeComponent } from './edit-initiative.component';
   declarations: [EditInitiativeComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [EditInitiativeComponent]
 })
 export class EditInitiativeModule { }
