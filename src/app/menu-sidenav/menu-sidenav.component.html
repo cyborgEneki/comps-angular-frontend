@@ -1,6 +1,12 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-        <mat-toolbar class="sidenav--border-bottom">COMPS</mat-toolbar>
+        <mat-toolbar class="sidenav--border-bottom">
+            <ul class="list-unstyled mt-4">
+                <li>
+                    <a class="text-decoration-none text-reset" routerLink="/home" routerLinkActive="active">COMPS</a>
+                </li>
+            </ul>
+        </mat-toolbar>
         <mat-nav-list>
             <a mat-list-item href="#">Link 1</a>
             <a mat-list-item href="#">Link 2</a>
