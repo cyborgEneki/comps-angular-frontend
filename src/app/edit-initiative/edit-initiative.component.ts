@@ -5,11 +5,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-edit-initiative',
   templateUrl: './edit-initiative.component.html',
-  styleUrls: ['./edit-initiative.component.scss']
+  styleUrls: ['./edit-initiative.component.scss'],
 })
-
 export class EditInitiativeComponent implements OnInit {
-  editForm = new FormGroup({
+  editInitiativeForm = new FormGroup({
     initiativeName: new FormControl(''),
     initiativeLead: new FormControl(''),
     initiativeLeadEmail: new FormControl(''),
@@ -18,10 +17,11 @@ export class EditInitiativeComponent implements OnInit {
     statement: new FormControl(''),
   });
 
-  constructor() { }
+  constructor() {}
 
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  onSubmit() {
+    console.log(this.editInitiativeForm.value);
   }
-
 }

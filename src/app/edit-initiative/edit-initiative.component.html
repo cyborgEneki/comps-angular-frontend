@@ -1,31 +1,31 @@
-<form [formGroup]="editForm">
+<form [formGroup]="editInitiativeForm" (ngSubmit)="onSubmit()">
     <label>
         Initiative Name:
-        <input type="text" [formControlName]="initiativeName">
+        <input type="text" formControlName="initiativeName">
     </label>
 
     <label>
         Initiative Lead:
-        <input type="text" [formControlName]="initiativeLead">
+        <input type="text" formControlName="initiativeLead">
     </label>
 
     <label>
         Initiative Lead Email:
-        <input type="text" [formControlName]="initiativeLeadEmail">
+        <input type="text" formControlName="initiativeLeadEmail">
     </label>
 
     <label>
         Start Year:
-        <input type="text" [formControlName]="startYear">
+        <input type="text" formControlName="startYear">
     </label>
 
     <label>
         End Year:
-        <input type="text" [formControlName]="endYear">
+        <input type="text" formControlName="endYear">
     </label>
 
     <label>
         Statement:
-        <input type="text" [formControlName]="statement">
+        <input type="text" formControlName="statement">
     </label>
 </form>
