@@ -8,6 +8,22 @@
             </ul>
         </mat-toolbar>
         <mat-nav-list>
+            <mat-form-field appearance="fill">
+                <mat-label>Select Goal Team</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let goalTeam of goalTeams" [value]="goalTeam.test">
+                        {{goalTeam.test}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Select Initiative</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let initiative of initiatives" [value]="initiative.test">
+                        {{initiative.test}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
             <a mat-list-item href="#">Link 1</a>
             <a mat-list-item href="#">Link 2</a>
             <a mat-list-item href="#">Link 3</a>

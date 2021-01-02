@@ -12,10 +12,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MenuSidenavComponent } from './menu-sidenav/menu-sidenav.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuSidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -27,9 +29,9 @@ import { MenuSidenavComponent } from './menu-sidenav/menu-sidenav.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    AppRoutingModule, 
-    MenuSidenavComponent,
-    ReactiveFormsModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,6 +10,17 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class MenuSidenavComponent {
 
+  initiatives = [
+    {'test': 'a'}, 
+    {'test': 'b'}, 
+    {'test': 'c'}
+  ];
+  goalTeams = [
+    {'test': 'e'}, 
+    {'test': 'f'}, 
+    {'test': 'g'}
+  ];
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
