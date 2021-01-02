@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -19,6 +18,7 @@ import { AppComponent } from './app.component';
 import { MenuSidenavComponent } from './menu-sidenav/menu-sidenav.component';
 import { EditInitiativeComponent } from './edit-initiative/edit-initiative.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { IndicatorComponent } from './indicator/indicator.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     MenuSidenavComponent,
     EditInitiativeComponent,
     WelcomeComponent,
+    IndicatorComponent,
   ],
   imports: [
     BrowserModule,

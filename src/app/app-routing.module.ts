@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EditInitiativeComponent } from '../app/edit-initiative/edit-initiative.component';
+import { IndicatorComponent } from './indicator/indicator.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
-  { path: 'edit-initiative', component: EditInitiativeComponent }
+  { path: 'edit-initiative', component: EditInitiativeComponent },
+  { path: 'create-indicator', component: IndicatorComponent }
 ];
 
 @NgModule({

@@ -1,0 +1,29 @@
+<div class="ml-3 mt-2">
+    <form [formGroup]="indicatorForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill" class="indicator-form-field--width">
+            <mat-label>Pathway Statement</mat-label>
+            <textarea matInput type="text" formControlName="pathwayStatement"></textarea>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="indicator-form-field--width">
+            <mat-label>Indicator Description</mat-label>
+            <textarea matInput type="text" formControlName="indicatorDescription"></textarea>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="indicator-form-field--width">
+            <mat-label>Indicator Label</mat-label>
+            <input matInput type="text" formControlName="indicatorLabel">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="indicator-form-field--width">
+            <mat-label>Indicator Units</mat-label>
+            <input matInput type="text" formControlName="indicatorUnits">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="indicator-form-field--width">
+            <mat-label>Indicator Data Source</mat-label>
+            <input matInput type="text" formControlName="indicatorDataSource">
+        </mat-form-field>
+        <button mat-raised-button class="float-right mr-3" type="submit">Save</button>
+    </form>
+</div>
