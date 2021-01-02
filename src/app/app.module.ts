@@ -15,12 +15,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { AppComponent } from './app.component';
 import { MenuSidenavComponent } from './menu-sidenav/menu-sidenav.component';
 import { EditInitiativeComponent } from './edit-initiative/edit-initiative.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuSidenavComponent,
-    EditInitiativeComponent
+    EditInitiativeComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
