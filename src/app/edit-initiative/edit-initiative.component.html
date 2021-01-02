@@ -1,7 +1,31 @@
-<p>edit-initiative works!</p>
+<form [formGroup]="editForm">
+    <label>
+        Initiative Name:
+        <input type="text" [formControlName]="initiativeName">
+    </label>
 
-<label for="editInitiativeForm"></label>
-<input type="text" (formControl="editInitiativeForm" )>
+    <label>
+        Initiative Lead:
+        <input type="text" [formControlName]="initiativeLead">
+    </label>
 
+    <label>
+        Initiative Lead Email:
+        <input type="text" [formControlName]="initiativeLeadEmail">
+    </label>
 
-<h1>{{ editInitiativeForm.value }}</h1>
+    <label>
+        Start Year:
+        <input type="text" [formControlName]="startYear">
+    </label>
+
+    <label>
+        End Year:
+        <input type="text" [formControlName]="endYear">
+    </label>
+
+    <label>
+        Statement:
+        <input type="text" [formControlName]="statement">
+    </label>
+</form>
