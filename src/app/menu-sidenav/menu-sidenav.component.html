@@ -1,5 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
         <mat-toolbar class="sidenav--border-bottom">
             <ul class="list-unstyled mt-4">
                 <li>
@@ -24,16 +25,36 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <a mat-list-item href="#">Link 1</a>
-            <a mat-list-item href="#">Link 2</a>
-            <a mat-list-item href="#">Link 3</a>
+            <div class="sidenav-menu-item" id="sidenav-menu-item-pathway">
+                <a mat-list-item href="#">
+                    <span class="w-50">Pathway</span>
+                    <span><i class="fas fa-plus-circle ml-3"></i></span>
+                </a>
+                <div class="d-flex sidenav-menu-item__sub-item-group">
+                    <a href="#" class="sidenav-menu-item__sub-item">test</a>
+                    <a href="#" class="sidenav-menu-item__sub-item">test</a>
+                    <a href="#" class="sidenav-menu-item__sub-item">test</a>
+                </div>
+            </div>
+            <div class="sidenav-menu-item" id="sidenav-menu-item-outcome">
+                <a mat-list-item href="#">
+                    <span class="w-50 ">Outcome</span>
+                    <span><i class="fas fa-plus-circle ml-3"></i></span>
+                </a>
+                <div class="d-flex sidenav-menu-item__sub-item-group">
+                    <a href="#" class="sidenav-menu-item__sub-item">test</a>
+                    <a href="#" class="sidenav-menu-item__sub-item">test</a>
+                    <a href="#" class="sidenav-menu-item__sub-item">test</a>
+                </div>
+            </div>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
         <mat-toolbar class="topnav">
-            <button type=" button " aria-label="Toggle sidenav " mat-icon-button (click)="drawer.toggle() " *ngIf="isHandset$ | async ">
-        <mat-icon aria-label="Side nav toggle icon ">menu</mat-icon>
-      </button>
+            <button type=" button " aria-label="Toggle sidenav " mat-icon-button (click)="drawer.toggle() "
+                *ngIf="isHandset$ | async ">
+                <mat-icon aria-label="Side nav toggle icon ">menu</mat-icon>
+            </button>
             <span>INITIATIVE DASHBOARD SYSTEM</span>
         </mat-toolbar>
         <!-- Add Content Here -->
