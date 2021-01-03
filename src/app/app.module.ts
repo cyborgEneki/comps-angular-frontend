@@ -19,6 +19,8 @@ import { MenuSidenavComponent } from './menu-sidenav/menu-sidenav.component';
 import { EditInitiativeComponent } from './edit-initiative/edit-initiative.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { IndicatorComponent } from './indicator/indicator.component';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { IndicatorComponent } from './indicator/indicator.component';
     AppRoutingModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    GraphQLModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

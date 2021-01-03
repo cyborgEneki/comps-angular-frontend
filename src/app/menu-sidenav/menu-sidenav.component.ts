@@ -20,6 +20,9 @@ export class MenuSidenavComponent {
     {'test': 'f'}, 
     {'test': 'g'}
   ];
+  deleteIndicator() {
+    console.log('delete this')
+  }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
