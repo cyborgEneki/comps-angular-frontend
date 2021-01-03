@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
@@ -50,19 +51,10 @@ export class MenuSidenavComponent {
   });
 
   // stateFormControl = new FormControl('', [Validators.required]);
-  // goalTeams = [
-  //   { id: 1, name: 'e' },
-  //   { id: 2, name: 'f' },
-  //   { id: 3, name: 'g' },
-  // ];
 
   displayInitiativeData(initiative: Object) {
-    // Goal team should appear in dropdown
-    // Team where
-    console.log(initiative);
     this.goalTeamForm.controls['goalTeam'].setValue(initiative.goalTeam._id);
-    // console.log(this.goalTeamName);
-    // Route should change to edit form
+    this.router.navigate(['/edit-initiative']);
     // Form should be populated with initiative data
 
     // When saving, the value of goal team should be added to the data sent by the request
@@ -86,7 +78,8 @@ export class MenuSidenavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private apollo: Apollo
+    private apollo: Apollo,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
