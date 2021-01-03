@@ -9,18 +9,23 @@
             </ul>
         </mat-toolbar>
         <mat-nav-list>
+            <form [formGroup]="goalTeamForm" >
             <mat-form-field appearance="fill">
                 <mat-label>Select Goal Team</mat-label>
-                <mat-select id="goal-team">
-                    <mat-option *ngFor="let goalTeam of goalTeams" [value]="goalTeam.test">
-                        {{goalTeam.test}}
+                <mat-select [formControlName]="'goalTeam'">
+                    <mat-option *ngFor="let goalTeam of goalTeams" [value]="goalTeam.id">
+                        {{goalTeam.name}}
                     </mat-option>
                 </mat-select>
+                <!-- <mat-error *ngIf="stateFormControl.hasError('required')">State is required
+                </mat-error> -->
             </mat-form-field>
+            </form>
             <mat-form-field appearance="fill">
                 <mat-label>Select Initiative</mat-label>
                 <mat-select>
-                    <mat-option *ngFor="let initiative of initiatives | async" [value]="initiative.name" (click)="displayInitiativeData(initiative)">
+                    <mat-option *ngFor="let initiative of initiatives | async" [value]="initiative.name"
+                        (click)="displayInitiativeData(initiative)">
                         {{initiative.name}}
                     </mat-option>
                 </mat-select>
@@ -42,7 +47,8 @@
                     <span><i class="fas fa-plus-circle ml-3"></i></span>
                 </a>
                 <div class="d-flex sidenav-menu-item__sub-item-group">
-                    <a href="#" class="sidenav-menu-item__sub-item">test <i class="fas fa-minus-circle ml-3" (click)="deleteIndicator()"></i></a>
+                    <a href="#" class="sidenav-menu-item__sub-item">test <i class="fas fa-minus-circle ml-3"
+                            (click)="deleteIndicator()"></i></a>
                     <a href="#" class="sidenav-menu-item__sub-item">test</a>
                     <a href="#" class="sidenav-menu-item__sub-item">test</a>
                 </div>
