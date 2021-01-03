@@ -11,7 +11,7 @@
         <mat-nav-list>
             <mat-form-field appearance="fill">
                 <mat-label>Select Goal Team</mat-label>
-                <mat-select>
+                <mat-select id="goal-team">
                     <mat-option *ngFor="let goalTeam of goalTeams" [value]="goalTeam.test">
                         {{goalTeam.test}}
                     </mat-option>
@@ -20,7 +20,7 @@
             <mat-form-field appearance="fill">
                 <mat-label>Select Initiative</mat-label>
                 <mat-select>
-                    <mat-option *ngFor="let initiative of initiatives | async">
+                    <mat-option *ngFor="let initiative of initiatives | async" [value]="initiative.name" (click)="displayInitiativeData(initiative)">
                         {{initiative.name}}
                     </mat-option>
                 </mat-select>
