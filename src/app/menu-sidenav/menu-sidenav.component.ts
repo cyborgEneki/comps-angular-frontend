@@ -45,6 +45,7 @@ const GET_GOAL_TEAMS = gql`
   templateUrl: './menu-sidenav.component.html',
   styleUrls: ['./menu-sidenav.component.scss'],
 })
+
 export class MenuSidenavComponent {
   goalTeamForm = new FormGroup({
     goalTeam: new FormControl(''),
@@ -54,7 +55,7 @@ export class MenuSidenavComponent {
 
   displayInitiativeData(initiative: Object) {
     this.goalTeamForm.controls['goalTeam'].setValue(initiative.goalTeam._id);
-    this.router.navigate(['/edit-initiative']);
+    this.router.navigate(['/edit-initiative', initiative._id]);
     // Form should be populated with initiative data
 
     // When saving, the value of goal team should be added to the data sent by the request
@@ -72,9 +73,8 @@ export class MenuSidenavComponent {
       shareReplay()
     );
 
-  // public initiatives!: Observable<any>;
-  public initiatives!: Observable<any>;
-  public goalTeams!: Observable<any>;
+  initiatives!: Observable<any>;
+  goalTeams!: Observable<any>;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -89,7 +89,6 @@ export class MenuSidenavComponent {
       })
       .valueChanges.pipe(
         map((result: any) => {
-          console.log(result.data.initiatives.initiatives);
           return result.data.initiatives.initiatives;
         })
       );
@@ -100,7 +99,6 @@ export class MenuSidenavComponent {
       })
       .valueChanges.pipe(
         map((result: any) => {
-          console.log(result.data.goalTeams.goalTeams);
           return result.data.goalTeams.goalTeams;
         })
       );
