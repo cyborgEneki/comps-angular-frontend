@@ -60,7 +60,7 @@ export class MenuSidenavComponent {
     // Goal team should appear in dropdown
     // Team where
     console.log(initiative);
-    this.goalTeamForm.controls['goalTeam'].setValue(this.goalTeams[0].id);
+    this.goalTeamForm.controls['goalTeam'].setValue(initiative.goalTeam._id);
     // console.log(this.goalTeamName);
     // Route should change to edit form
     // Form should be populated with initiative data

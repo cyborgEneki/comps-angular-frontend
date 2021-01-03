@@ -13,8 +13,8 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Select Goal Team</mat-label>
                     <mat-select [formControlName]="'goalTeam'">
-                        <mat-option *ngFor="let goalTeam of goalTeams | async" [value]="goalTeam.id">
-                            {{goalTeam.name}}
+                        <mat-option *ngFor="let goalTeam of goalTeams | async" [value]="goalTeam._id">
+                            {{ goalTeam.name }}
                         </mat-option>
                     </mat-select>
                     <!-- <mat-error *ngIf="stateFormControl.hasError('required')">State is required
@@ -24,9 +24,9 @@
             <mat-form-field appearance="fill">
                 <mat-label>Select Initiative</mat-label>
                 <mat-select>
-                    <mat-option *ngFor="let initiative of initiatives | async" [value]="initiative.name"
+                    <mat-option *ngFor="let initiative of initiatives | async" [value]="initiative._id"
                         (click)="displayInitiativeData(initiative)">
-                        {{initiative.name}}
+                        {{ initiative.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
