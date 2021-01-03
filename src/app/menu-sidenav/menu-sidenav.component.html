@@ -9,17 +9,17 @@
             </ul>
         </mat-toolbar>
         <mat-nav-list>
-            <form [formGroup]="goalTeamForm" >
-            <mat-form-field appearance="fill">
-                <mat-label>Select Goal Team</mat-label>
-                <mat-select [formControlName]="'goalTeam'">
-                    <mat-option *ngFor="let goalTeam of goalTeams" [value]="goalTeam.id">
-                        {{goalTeam.name}}
-                    </mat-option>
-                </mat-select>
-                <!-- <mat-error *ngIf="stateFormControl.hasError('required')">State is required
+            <form [formGroup]="goalTeamForm">
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Goal Team</mat-label>
+                    <mat-select [formControlName]="'goalTeam'">
+                        <mat-option *ngFor="let goalTeam of goalTeams | async" [value]="goalTeam.id">
+                            {{goalTeam.name}}
+                        </mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="stateFormControl.hasError('required')">State is required
                 </mat-error> -->
-            </mat-form-field>
+                </mat-form-field>
             </form>
             <mat-form-field appearance="fill">
                 <mat-label>Select Initiative</mat-label>

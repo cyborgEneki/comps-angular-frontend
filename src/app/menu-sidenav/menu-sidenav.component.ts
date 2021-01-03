@@ -19,9 +19,21 @@ const GET_INITIATIVES = gql`
         startYear
         endYear
         statement
-        goalTeam { 
+        goalTeam {
+          _id
           name
         }
+      }
+    }
+  }
+`;
+
+const GET_GOAL_TEAMS = gql`
+  {
+    goalTeams {
+      goalTeams {
+        _id
+        name
       }
     }
   }
@@ -38,16 +50,16 @@ export class MenuSidenavComponent {
   });
 
   // stateFormControl = new FormControl('', [Validators.required]);
-  goalTeams = [
-    { id: 1, name: 'e' },
-    { id: 2, name: 'f' },
-    { id: 3, name: 'g' },
-  ];
+  // goalTeams = [
+  //   { id: 1, name: 'e' },
+  //   { id: 2, name: 'f' },
+  //   { id: 3, name: 'g' },
+  // ];
 
   displayInitiativeData(initiative: Object) {
     // Goal team should appear in dropdown
-      // Team where 
-      console.log(initiative);
+    // Team where
+    console.log(initiative);
     this.goalTeamForm.controls['goalTeam'].setValue(this.goalTeams[0].id);
     // console.log(this.goalTeamName);
     // Route should change to edit form
@@ -68,7 +80,9 @@ export class MenuSidenavComponent {
       shareReplay()
     );
 
+  // public initiatives!: Observable<any>;
   public initiatives!: Observable<any>;
+  public goalTeams!: Observable<any>;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -84,6 +98,17 @@ export class MenuSidenavComponent {
         map((result: any) => {
           console.log(result.data.initiatives.initiatives);
           return result.data.initiatives.initiatives;
+        })
+      );
+
+    this.goalTeams = this.apollo
+      .watchQuery({
+        query: GET_GOAL_TEAMS,
+      })
+      .valueChanges.pipe(
+        map((result: any) => {
+          console.log(result.data.goalTeams.goalTeams);
+          return result.data.goalTeams.goalTeams;
         })
       );
   }
