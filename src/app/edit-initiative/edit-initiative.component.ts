@@ -96,7 +96,7 @@ export class EditInitiativeComponent implements OnInit {
             statement: this.initiative.statement,
           });
           console.log(this.editInitiativeForm);
-        } else this.error = 'Book does not exist';
+        } else this.error = 'Initiative does not exist';
       });
   }
 

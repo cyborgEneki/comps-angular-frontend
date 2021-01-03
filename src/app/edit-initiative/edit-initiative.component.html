@@ -31,7 +31,13 @@
         </div>
         <mat-form-field appearance="fill" class="edit-initative-form-field--width">
             <mat-label>Statement</mat-label>
-            <textarea matInput type="text" formControlName="endYear"></textarea>
+            <textarea 
+            matInput 
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="5"
+            type="text" 
+            formControlName="statement">
+        </textarea>
         </mat-form-field>
 
         <button mat-raised-button class="float-right mr-3" type="submit">Save</button>
