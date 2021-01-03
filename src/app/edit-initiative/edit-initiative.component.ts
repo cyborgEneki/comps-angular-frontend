@@ -19,7 +19,9 @@ export class EditInitiativeComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   onSubmit() {
     console.log(this.editInitiativeForm.value);

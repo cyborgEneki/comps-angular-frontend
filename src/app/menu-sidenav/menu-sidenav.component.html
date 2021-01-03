@@ -20,8 +20,8 @@
             <mat-form-field appearance="fill">
                 <mat-label>Select Initiative</mat-label>
                 <mat-select>
-                    <mat-option *ngFor="let initiative of initiatives" [value]="initiative.test">
-                        {{initiative.test}}
+                    <mat-option *ngFor="let initiative of initiatives | async">
+                        {{initiative.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
