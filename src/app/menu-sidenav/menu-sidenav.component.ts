@@ -19,7 +19,9 @@ const GET_INITIATIVES = gql`
         startYear
         endYear
         statement
-        goalTeam
+        goalTeam { 
+          name
+        }
       }
     }
   }
@@ -44,7 +46,8 @@ export class MenuSidenavComponent {
 
   displayInitiativeData(initiative: Object) {
     // Goal team should appear in dropdown
-     // Team where 
+      // Team where 
+      console.log(initiative);
     this.goalTeamForm.controls['goalTeam'].setValue(this.goalTeams[0].id);
     // console.log(this.goalTeamName);
     // Route should change to edit form
