@@ -56,9 +56,9 @@ export class MenuSidenavComponent {
   displayInitiativeData(initiative: Object) {
     this.goalTeamForm.controls['goalTeam'].setValue(initiative.goalTeam._id);
     this.router.navigate(['/edit-initiative', initiative._id]);
-    // Form should be populated with initiative data
 
     // When saving, the value of goal team should be added to the data sent by the request
+    // Clear on reload
     console.log('display data');
   }
 
