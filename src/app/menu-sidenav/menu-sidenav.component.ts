@@ -33,6 +33,34 @@ const GET_INITIATIVES = gql`
   }
 `;
 
+const GET_INITIATIVE_PATHWAY_INDICATORS = gql`
+  query initiativePathwayIndicators($initiative: String!) {
+    initiativePathwayIndicators(initiative: $initiative) {
+      _id
+      statement,
+      description,
+      label,
+      units,
+      dataSource,
+      type
+    }
+  }
+`;
+
+const GET_INITIATIVE_OUTCOME_INDICATORS = gql`
+  query initiativePathwayIndicators($initiative: String!) {
+    initiativePathwayIndicators(initiative: $initiative) {
+      _id
+      statement,
+      description,
+      label,
+      units,
+      dataSource,
+      type
+    }
+  }
+`;
+
 @Component({
   selector: 'app-menu-sidenav',
   templateUrl: './menu-sidenav.component.html',
@@ -84,12 +112,31 @@ export class MenuSidenavComponent {
   displayInitiativeData(initiative: any) {
     this.isNotHomepage = true;
     this.router.navigate(['/edit-initiative', initiative._id]);
+    // Return all indicators and store in service
+
+    this.apollo
+      .query({
+        query: GET_INITIATIVE_PATHWAY_INDICATORS,
+        variables: {
+          initiative: initiative._id,
+        },
+      })
+      .subscribe(({ data }: any) => {
+        if (data) {
+          console.log(data);
+        }
+      });
+    // const currentItem: DataInterface = {
+    //   indicatorType: this.indicatorType,
+    // };
+
+    // this._dataService.addData(currentItem);
   }
 
   displayPathwayCreateForm() {
     this.router.navigate([
       '/initiative/create-indicator',
-      this.pathParam.source._value
+      this.pathParam.source._value,
     ]);
 
     this.indicatorType = 'P';

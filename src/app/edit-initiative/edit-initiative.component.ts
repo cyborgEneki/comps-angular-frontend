@@ -150,7 +150,7 @@ export class EditInitiativeComponent implements OnInit, OnDestroy {
           id: this.initiativeId,
         },
       })
-      .subscribe(({ data }) => {
+      .subscribe(({ data }:any) => {
         if (data.initiative) {
           this.initiative = data.initiative;
           this.editInitiativeForm.setValue({
