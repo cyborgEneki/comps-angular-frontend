@@ -70,7 +70,6 @@ export class IndicatorComponent implements OnInit {
   }
 
   onSubmit() {
-    //PASS TYPE
     this.indicatorForm.value.type = this._dataService.getData()[0].indicatorType;
     this.indicatorForm.value.initiative = this.initiativeId;
 
@@ -82,5 +81,13 @@ export class IndicatorComponent implements OnInit {
       .subscribe(() => {
         console.log('created');
       });
+    
+    this.indicatorForm.setValue({
+      statement: '',
+      description: '',
+      label: '',
+      units: '',
+      dataSource: ''
+    });
   }
 }
