@@ -26,13 +26,50 @@ const GET_INITIATIVES = gql`
   }
 `;
 
+const UPDATE_INITIATIVE = gql`
+  mutation updateInitiative(
+    $id: ID!
+    $name: String!
+    $leadName: String!
+    $leadEmail: String!
+    $startYear: String!
+    $endYear: String!
+    $statement: String!
+    $goalTeam: String!
+  ) {
+    updateInitiative(
+      initiativeInput: {
+        id: $id
+        name: $name
+        leadName: $leadName
+        leadEmail: $leadEmail
+        startYear: $startYear
+        endYear: $endYear
+        statement: $statement
+        goalTeam: $goalTeam
+      }
+    ) {
+      _id
+      name
+      leadName
+      leadEmail
+      startYear
+      endYear
+      statement
+      goalTeam {
+        name
+      }
+    }
+  }
+`;
+
 @Component({
   selector: 'app-edit-initiative',
   templateUrl: './edit-initiative.component.html',
   styleUrls: ['./edit-initiative.component.scss'],
 })
 export class EditInitiativeComponent implements OnInit {
-  initiativeId!: String;
+  initiativeId: any;
   initiative: any = {};
   error!: String;
 
@@ -101,6 +138,16 @@ export class EditInitiativeComponent implements OnInit {
   }
 
   onSubmit() {
+    this.editInitiativeForm.value.id = this.initiativeId;
     console.log(this.editInitiativeForm.value);
+
+    // this.apollo
+    //   .mutate({
+    //     mutation: UPDATE_INITIATIVE,
+    //     variables: this.editInitiativeForm.value,
+    //   })
+    //   .subscribe(() => {
+    //     console.log('updated');
+    //   });
   }
 }

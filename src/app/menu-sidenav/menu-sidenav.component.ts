@@ -53,7 +53,7 @@ export class MenuSidenavComponent {
 
   // stateFormControl = new FormControl('', [Validators.required]);
 
-  displayInitiativeData(initiative: Object) {
+  displayInitiativeData(initiative: any) {
     this.goalTeamForm.controls['goalTeam'].setValue(initiative.goalTeam._id);
     this.router.navigate(['/edit-initiative', initiative._id]);
 
