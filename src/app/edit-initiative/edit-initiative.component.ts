@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 // This is the object that is exposed in a reactive form in contrast to the template-driven forms which are limited to directives within that template
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { RouteStateService } from '../route-state.service';
+import { AppService } from '../app.service.service';
 
 const GET_INITIATIVE = gql`
   query getInitiative($id: ID!) {
@@ -87,7 +88,7 @@ export class EditInitiativeComponent implements OnInit, OnDestroy {
   initiative: any = {};
   error!: String;
   goalTeams!: Observable<any>;
-  test!: any;
+  initiativeIdFromUrl!: any;
 
   editInitiativeForm = new FormGroup({
     name: new FormControl(''),
@@ -123,12 +124,12 @@ export class EditInitiativeComponent implements OnInit, OnDestroy {
     this.route.paramMap
       .pipe(
         map((paramMap) => {
-          this.test = paramMap.get('initiativeId');
+          this.initiativeIdFromUrl = paramMap.get('initiativeId');
         }),
         takeUntil(this.destroy)
       )
-      .subscribe((routePathParam) => {
-        this.routeStateService.updatePathParamState(this.test);
+      .subscribe(() => {
+        this.routeStateService.updatePathParamState(this.initiativeIdFromUrl);
       });
 
     this.findInitiative();
@@ -137,7 +138,7 @@ export class EditInitiativeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy.next();
     this.destroy.complete();
-    this.routeStateService.updatePathParamState("");
+    this.routeStateService.updatePathParamState('');
   }
 
   findInitiative() {

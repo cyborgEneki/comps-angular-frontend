@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
@@ -18,7 +18,7 @@ const CREATE_INDICATOR = gql`
     $initiative: String!
   ) {
     createIndicator(
-      quoteInput: {
+      indicatorInput: {
         statement: $statement
         description: $description
         label: $label
@@ -28,14 +28,15 @@ const CREATE_INDICATOR = gql`
         initiative: $initiative
       }
     ) {
-      _id
       statement
       description
       label
       units
       dataSource
       type
-      initiative
+      initiative {
+        name
+      }
     }
   }
 `;
@@ -54,19 +55,24 @@ export class IndicatorComponent implements OnInit {
     dataSource: new FormControl(''),
   });
 
+  initiativeId: any;
+
   constructor(
     private apollo: Apollo,
-    private _dataService: AppService
+    private _dataService: AppService,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.initiativeId = params.get('initiativeId');
+    });
+  }
 
   onSubmit() {
     //PASS TYPE
-    this.indicatorForm.value.indicatorType = this._dataService.getData()[0].indicatorType;
-
-    //PASS INITIATIVE_ID
-    console.log(this.indicatorForm.value);
+    this.indicatorForm.value.type = this._dataService.getData()[0].indicatorType;
+    this.indicatorForm.value.initiative = this.initiativeId;
 
     this.apollo
       .mutate({
