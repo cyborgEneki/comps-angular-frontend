@@ -9,6 +9,9 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { FormGroup, FormControl } from '@angular/forms';
 
+import { EIItem } from '../edit-initiative/edit-initiative';
+import { EditInitiatiaveService } from '../edit-initiative/edit-initiatiave.service';
+
 const GET_INITIATIVES = gql`
   {
     initiatives {
@@ -45,7 +48,6 @@ const GET_GOAL_TEAMS = gql`
   templateUrl: './menu-sidenav.component.html',
   styleUrls: ['./menu-sidenav.component.scss'],
 })
-
 export class MenuSidenavComponent {
   goalTeamForm = new FormGroup({
     goalTeam: new FormControl(''),
@@ -66,6 +68,14 @@ export class MenuSidenavComponent {
     console.log('delete this');
   }
 
+  public addGoalTeamToInitiative() {
+    const currentItem: EIItem = {
+      goalTeam: this.goalTeamForm.value
+    };
+
+    this.editInitiatiaveService.addData(currentItem);
+  }
+
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -79,7 +89,8 @@ export class MenuSidenavComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private apollo: Apollo,
-    private router: Router
+    private router: Router,
+    private editInitiatiaveService: EditInitiatiaveService
   ) {}
 
   ngOnInit(): void {

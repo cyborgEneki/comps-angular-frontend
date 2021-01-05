@@ -6,8 +6,14 @@ import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
-  { path: 'edit-initiative/:initiativeId', component: EditInitiativeComponent },
-  { path: 'create-indicator', component: IndicatorComponent },
+  {
+    path: 'edit-initiative/:initiativeId',
+    component: EditInitiativeComponent
+  },
+  { 
+    path: 'create-indicator', 
+    component: IndicatorComponent
+  },
 ];
 
 @NgModule({

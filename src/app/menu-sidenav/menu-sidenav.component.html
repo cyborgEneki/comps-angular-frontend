@@ -12,7 +12,7 @@
             <form [formGroup]="goalTeamForm">
                 <mat-form-field appearance="fill">
                     <mat-label>Select Goal Team</mat-label>
-                    <mat-select [formControlName]="'goalTeam'">
+                    <mat-select [formControlName]="'goalTeam'" (selectionChange)="addGoalTeamToInitiative()">
                         <mat-option *ngFor="let goalTeam of goalTeams | async" [value]="goalTeam._id">
                             {{ goalTeam.name }}
                         </mat-option>

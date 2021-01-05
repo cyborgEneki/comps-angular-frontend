@@ -13,14 +13,15 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { MenuSidenavComponent } from './menu-sidenav/menu-sidenav.component';
 import { EditInitiativeComponent } from './edit-initiative/edit-initiative.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { IndicatorComponent } from './indicator/indicator.component';
-import { GraphQLModule } from './graphql.module';
-import { HttpClientModule } from '@angular/common/http';
+import { EditInitiatiaveService } from './edit-initiative/edit-initiatiave.service';
 
 @NgModule({
   declarations: [
@@ -46,9 +47,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatFormFieldModule,
     MatInputModule,
     GraphQLModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [EditInitiatiaveService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
