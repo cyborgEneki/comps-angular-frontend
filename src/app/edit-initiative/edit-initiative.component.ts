@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 // This is the object that is exposed in a reactive form in contrast to the template-driven forms which are limited to directives within that template
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
+import { RouteStateService } from '../route-state.service';
 
 const GET_INITIATIVE = gql`
   query getInitiative($id: ID!) {
@@ -79,11 +80,14 @@ const GET_GOAL_TEAMS = gql`
   templateUrl: './edit-initiative.component.html',
   styleUrls: ['./edit-initiative.component.scss'],
 })
-export class EditInitiativeComponent implements OnInit {
+export class EditInitiativeComponent implements OnInit, OnDestroy {
+  private destroy = new Subject<void>();
+
   initiativeId: any;
   initiative: any = {};
   error!: String;
   goalTeams!: Observable<any>;
+  test!: any;
 
   editInitiativeForm = new FormGroup({
     name: new FormControl(''),
@@ -97,7 +101,8 @@ export class EditInitiativeComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private apollo: Apollo
+    private apollo: Apollo,
+    private routeStateService: RouteStateService
   ) {}
 
   ngOnInit(): void {
@@ -115,7 +120,24 @@ export class EditInitiativeComponent implements OnInit {
         })
       );
 
+    this.route.paramMap
+      .pipe(
+        map((paramMap) => {
+          this.test = paramMap.get('initiativeId');
+        }),
+        takeUntil(this.destroy)
+      )
+      .subscribe((routePathParam) => {
+        this.routeStateService.updatePathParamState(this.test);
+      });
+
     this.findInitiative();
+  }
+
+  ngOnDestroy() {
+    this.destroy.next();
+    this.destroy.complete();
+    this.routeStateService.updatePathParamState("");
   }
 
   findInitiative() {
@@ -137,7 +159,7 @@ export class EditInitiativeComponent implements OnInit {
             startYear: this.initiative.startYear,
             endYear: this.initiative.endYear,
             statement: this.initiative.statement,
-            goalTeam: this.initiative.goalTeam._id
+            goalTeam: this.initiative.goalTeam._id,
           });
         } else this.error = 'Initiative does not exist';
       });

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
@@ -54,26 +55,26 @@ export class IndicatorComponent implements OnInit {
   });
 
   constructor(
-    private apollo: Apollo, 
+    private apollo: Apollo,
     private _dataService: AppService
-    ) {}
+  ) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
-    console.log(this._dataService.getData()[0]);
-    // //CHECK TYPE
-    // //PASS TYPE
-    // //PASS INITIATIVE_ID
-    // console.log(this.indicatorForm.value);
+    //PASS TYPE
+    this.indicatorForm.value.indicatorType = this._dataService.getData()[0].indicatorType;
 
-    // this.apollo
-    //   .mutate({
-    //     mutation: CREATE_INDICATOR,
-    //     variables: this.indicatorForm.value,
-    //   })
-    //   .subscribe(() => {
-    //     console.log('created');
-    //   });
+    //PASS INITIATIVE_ID
+    console.log(this.indicatorForm.value);
+
+    this.apollo
+      .mutate({
+        mutation: CREATE_INDICATOR,
+        variables: this.indicatorForm.value,
+      })
+      .subscribe(() => {
+        console.log('created');
+      });
   }
 }

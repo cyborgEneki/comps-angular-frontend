@@ -8,11 +8,11 @@ const routes: Routes = [
   { path: '', component: WelcomeComponent },
   {
     path: 'edit-initiative/:initiativeId',
-    component: EditInitiativeComponent
+    component: EditInitiativeComponent,
   },
-  { 
-    path: 'create-indicator', 
-    component: IndicatorComponent
+  {
+    path: 'initiative/create-indicator/:initiativeId',
+    component: IndicatorComponent,
   },
 ];
 

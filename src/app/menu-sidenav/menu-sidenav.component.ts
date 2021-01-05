@@ -11,6 +11,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 import { AppService } from '../app.service.service';
 import { DataInterface } from '../app.data';
+import { RouteStateService } from '../route-state.service';
 
 const GET_INITIATIVES = gql`
   {
@@ -44,12 +45,14 @@ export class MenuSidenavComponent {
   });
   isNotHomepage: boolean = false;
   indicatorType?: string;
+  pathParam!: Observable<string>;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private apollo: Apollo,
     private router: Router,
-    private _dataService: AppService
+    private _dataService: AppService,
+    private routeStateService: RouteStateService
   ) {}
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -69,6 +72,7 @@ export class MenuSidenavComponent {
           return result.data.initiatives.initiatives;
         })
       );
+    this.pathParam = this.routeStateService.pathParam;
   }
 
   redirectToHomePage() {
@@ -83,8 +87,11 @@ export class MenuSidenavComponent {
   }
 
   displayPathwayCreateForm() {
-    this.router.navigate(['create-indicator']);
-    
+    this.router.navigate([
+      '/initiative/create-indicator',
+      this.pathParam.source._value
+    ]);
+
     this.indicatorType = 'P';
 
     const currentItem: DataInterface = {

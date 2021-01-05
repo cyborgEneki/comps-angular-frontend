@@ -15,5 +15,5 @@ export class AppService {
 
   getData(): DataInterface[] {
     return this._data;
-  }
+  } 
 }
