@@ -8,21 +8,19 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
-const GET_INITIATIVES = gql`
-  {
-    initiatives {
-      initiatives {
+const GET_INITIATIVE = gql`
+  query getInitiative($id: ID!) {
+    initiative(_id: $id) {
+      _id
+      name
+      leadName
+      leadEmail
+      startYear
+      endYear
+      statement
+      goalTeam {
         _id
         name
-        leadName
-        leadEmail
-        startYear
-        endYear
-        statement
-        goalTeam {
-          _id
-          name
-        }
       }
     }
   }
@@ -124,24 +122,8 @@ export class EditInitiativeComponent implements OnInit {
   findInitiative() {
     this.error = '';
     this.apollo
-      .query<any>({
-        query: gql`
-          query($id: ID!) {
-            initiative(_id: $id) {
-              _id
-              name
-              leadName
-              leadEmail
-              startYear
-              endYear
-              statement
-              goalTeam {
-                _id
-                name
-              }
-            }
-          }
-        `,
+      .query({
+        query: GET_INITIATIVE,
         variables: {
           id: this.initiativeId,
         },

@@ -38,22 +38,24 @@ const GET_INITIATIVES = gql`
   styleUrls: ['./menu-sidenav.component.scss'],
 })
 export class MenuSidenavComponent {
+  initiatives!: Observable<any>;
+  selectInitiativeForm = new FormGroup({
+    initiative: new FormControl(''),
+  });
+  isNotHomepage: boolean = false;
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private apollo: Apollo,
+    private router: Router
+  ) {}
+
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
       map((result) => result.matches),
       shareReplay()
     );
-
-  initiatives!: Observable<any>;
-  selectInitiativeForm = new FormGroup({
-    initiative: new FormControl(''),
-  });
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private apollo: Apollo,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.initiatives = this.apollo
@@ -69,10 +71,12 @@ export class MenuSidenavComponent {
 
   redirectToHomePage() {
     this.selectInitiativeForm.controls['initiative'].setValue('');
+    this.isNotHomepage = false;
     this.router.navigate(['/']);
   }
 
   displayInitiativeData(initiative: any) {
+    this.isNotHomepage = true;
     this.router.navigate(['/edit-initiative', initiative._id]);
   }
 
