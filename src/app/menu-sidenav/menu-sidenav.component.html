@@ -5,22 +5,11 @@
             <ul class="list-unstyled mt-4">
                 <li>
                     <a class="text-decoration-none text-reset" routerLink="/" routerLinkActive="active">COMPS</a>
+                    <!-- <a class="text-decoration-none text-reset" routerLink="/" routerLinkActive="active">COMPS</a> -->
                 </li>
             </ul>
         </mat-toolbar>
         <mat-nav-list>
-            <form [formGroup]="goalTeamForm">
-                <mat-form-field appearance="fill">
-                    <mat-label>Select Goal Team</mat-label>
-                    <mat-select [formControlName]="'goalTeam'" (selectionChange)="addGoalTeamToInitiative()">
-                        <mat-option *ngFor="let goalTeam of goalTeams | async" [value]="goalTeam._id">
-                            {{ goalTeam.name }}
-                        </mat-option>
-                    </mat-select>
-                    <!-- <mat-error *ngIf="stateFormControl.hasError('required')">State is required
-                </mat-error> -->
-                </mat-form-field>
-            </form>
             <mat-form-field appearance="fill">
                 <mat-label>Select Initiative</mat-label>
                 <mat-select>
