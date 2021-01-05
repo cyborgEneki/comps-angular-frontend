@@ -4,21 +4,23 @@
         <mat-toolbar class="sidenav--border-bottom">
             <ul class="list-unstyled mt-4">
                 <li>
-                    <a class="text-decoration-none text-reset" routerLink="/" routerLinkActive="active">COMPS</a>
+                    <a class="text-decoration-none text-reset" (click)=redirectToHomePage()>COMPS</a>
                     <!-- <a class="text-decoration-none text-reset" routerLink="/" routerLinkActive="active">COMPS</a> -->
                 </li>
             </ul>
         </mat-toolbar>
         <mat-nav-list>
-            <mat-form-field appearance="fill">
-                <mat-label>Select Initiative</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let initiative of initiatives | async" [value]="initiative._id"
-                        (click)="displayInitiativeData(initiative)">
-                        {{ initiative.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+            <form [formGroup]="selectInitiativeForm">
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Initiative</mat-label>
+                    <mat-select [formControlName]="'initiative'">
+                        <mat-option *ngFor="let initiative of initiatives | async" [value]="initiative._id"
+                            (click)="displayInitiativeData(initiative)">
+                            {{ initiative.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
             <div class="sidenav-menu-item" id="sidenav-menu-item-pathway">
                 <a mat-list-item href="#">
                     <span class="w-50">Pathway</span>

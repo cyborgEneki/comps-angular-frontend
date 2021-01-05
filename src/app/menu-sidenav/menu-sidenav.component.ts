@@ -46,7 +46,9 @@ export class MenuSidenavComponent {
     );
 
   initiatives!: Observable<any>;
-
+  selectInitiativeForm = new FormGroup({
+    initiative: new FormControl(''),
+  });
   constructor(
     private breakpointObserver: BreakpointObserver,
     private apollo: Apollo,
@@ -65,10 +67,13 @@ export class MenuSidenavComponent {
       );
   }
 
+  redirectToHomePage() {
+    this.selectInitiativeForm.controls['initiative'].setValue('');
+    this.router.navigate(['/']);
+  }
+
   displayInitiativeData(initiative: any) {
     this.router.navigate(['/edit-initiative', initiative._id]);
-    // Clear on reload
-    console.log('display data');
   }
 
   deleteIndicator() {
