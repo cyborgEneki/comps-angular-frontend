@@ -4,7 +4,7 @@
         <mat-toolbar class="sidenav--border-bottom">
             <ul class="list-unstyled mt-4">
                 <li>
-                    <a class="text-decoration-none text-reset" (click)=redirectToHomePage()>COMPS</a>
+                    <a class="cursor-pointer link-text--no-decoration text-decoration-none" (click)=redirectToHomePage()>COMPS</a>
                 </li>
             </ul>
         </mat-toolbar>
@@ -24,7 +24,9 @@
                 <div class="sidenav-menu-item" id="sidenav-menu-item-pathway">
                     <a mat-list-item href="#">
                         <span class="w-50">Pathway</span>
-                        <span><i class="fas fa-plus-circle ml-3"></i></span>
+                        <span>
+                            <a href="" routerLink="create-indicator" routerLinkActive="active"><i class="fas fa-plus-circle ml-3"></i></a>
+                        </span>
                     </a>
                     <!-- <div class="d-flex sidenav-menu-item__sub-item-group">
                     <a href="#" class="sidenav-menu-item__sub-item">test</a>
