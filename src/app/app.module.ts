@@ -21,7 +21,8 @@ import { MenuSidenavComponent } from './menu-sidenav/menu-sidenav.component';
 import { EditInitiativeComponent } from './edit-initiative/edit-initiative.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { IndicatorComponent } from './indicator/indicator.component';
-import { EditInitiatiaveService } from './edit-initiative/edit-initiatiave.service';
+
+import { AppService } from './app.service.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { EditInitiatiaveService } from './edit-initiative/edit-initiatiave.servi
     GraphQLModule,
     HttpClientModule,
   ],
-  providers: [EditInitiatiaveService],
+  providers: [AppService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

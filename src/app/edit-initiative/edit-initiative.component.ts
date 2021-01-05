@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // This is the object that is exposed in a reactive form in contrast to the template-driven forms which are limited to directives within that template
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
@@ -97,8 +97,7 @@ export class EditInitiativeComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private apollo: Apollo,
-    private fb: FormBuilder
+    private apollo: Apollo
   ) {}
 
   ngOnInit(): void {

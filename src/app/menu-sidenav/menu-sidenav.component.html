@@ -22,10 +22,10 @@
             </form>
             <div *ngIf="isNotHomepage">
                 <div class="sidenav-menu-item" id="sidenav-menu-item-pathway">
-                    <a mat-list-item href="#">
+                    <a mat-list-item (click)="displayPathwayCreateForm()">
                         <span class="w-50">Pathway</span>
-                        <span>
-                            <a href="" routerLink="create-indicator" routerLinkActive="active"><i class="fas fa-plus-circle ml-3"></i></a>
+                        <span> 
+                            <i class="fas fa-plus-circle ml-3"></i>
                         </span>
                     </a>
                     <!-- <div class="d-flex sidenav-menu-item__sub-item-group">
@@ -37,7 +37,9 @@
                 <div class="sidenav-menu-item" id="sidenav-menu-item-outcome">
                     <a mat-list-item href="#">
                         <span class="w-50 ">Outcome</span>
-                        <span><i class="fas fa-plus-circle ml-3"></i></span>
+                        <span>
+                            <a href="" routerLink="create-indicator" routerLinkActive="active"><i class="fas fa-plus-circle ml-3"></i></a>
+                        </span>
                     </a>
                     <div class="d-flex sidenav-menu-item__sub-item-group">
                         <a href="#" class="sidenav-menu-item__sub-item">test <i class="fas fa-minus-circle ml-3"

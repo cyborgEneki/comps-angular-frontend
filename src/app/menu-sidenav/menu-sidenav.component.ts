@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { EIItem } from '../edit-initiative/edit-initiative';
-import { EditInitiatiaveService } from '../edit-initiative/edit-initiatiave.service';
+import { AppService } from '../app.service.service';
+import { DataInterface } from '../app.data';
 
 const GET_INITIATIVES = gql`
   {
@@ -43,11 +43,13 @@ export class MenuSidenavComponent {
     initiative: new FormControl(''),
   });
   isNotHomepage: boolean = false;
+  indicatorType?: string;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private apollo: Apollo,
-    private router: Router
+    private router: Router,
+    private _dataService: AppService
   ) {}
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -78,6 +80,18 @@ export class MenuSidenavComponent {
   displayInitiativeData(initiative: any) {
     this.isNotHomepage = true;
     this.router.navigate(['/edit-initiative', initiative._id]);
+  }
+
+  displayPathwayCreateForm() {
+    this.router.navigate(['create-indicator']);
+    
+    this.indicatorType = 'P';
+
+    const currentItem: DataInterface = {
+      indicatorType: this.indicatorType,
+    };
+
+    this._dataService.addData(currentItem);
   }
 
   deleteIndicator() {
