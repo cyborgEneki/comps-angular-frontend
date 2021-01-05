@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 // This is the object that is exposed in a reactive form in contrast to the template-driven forms which are limited to directives within that template
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
@@ -63,6 +65,17 @@ const UPDATE_INITIATIVE = gql`
   }
 `;
 
+const GET_GOAL_TEAMS = gql`
+  {
+    goalTeams {
+      goalTeams {
+        _id
+        name
+      }
+    }
+  }
+`;
+
 @Component({
   selector: 'app-edit-initiative',
   templateUrl: './edit-initiative.component.html',
@@ -72,6 +85,7 @@ export class EditInitiativeComponent implements OnInit {
   initiativeId: any;
   initiative: any = {};
   error!: String;
+  goalTeams!: Observable<any>;
 
   editInitiativeForm = new FormGroup({
     name: new FormControl(''),
@@ -80,6 +94,7 @@ export class EditInitiativeComponent implements OnInit {
     startYear: new FormControl(''),
     endYear: new FormControl(''),
     statement: new FormControl(''),
+    goalTeam: new FormControl(''),
   });
 
   constructor(
@@ -92,6 +107,16 @@ export class EditInitiativeComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.initiativeId = params.get('initiativeId');
     });
+
+    this.goalTeams = this.apollo
+      .watchQuery({
+        query: GET_GOAL_TEAMS,
+      })
+      .valueChanges.pipe(
+        map((result: any) => {
+          return result.data.goalTeams.goalTeams;
+        })
+      );
 
     this.findInitiative();
   }
@@ -131,23 +156,22 @@ export class EditInitiativeComponent implements OnInit {
             startYear: this.initiative.startYear,
             endYear: this.initiative.endYear,
             statement: this.initiative.statement,
+            goalTeam: this.initiative.goalTeam._id
           });
-          console.log(this.editInitiativeForm);
         } else this.error = 'Initiative does not exist';
       });
   }
 
   onSubmit() {
     this.editInitiativeForm.value.id = this.initiativeId;
-    console.log(this.editInitiativeForm.value);
 
-    // this.apollo
-    //   .mutate({
-    //     mutation: UPDATE_INITIATIVE,
-    //     variables: this.editInitiativeForm.value,
-    //   })
-    //   .subscribe(() => {
-    //     console.log('updated');
-    //   });
+    this.apollo
+      .mutate({
+        mutation: UPDATE_INITIATIVE,
+        variables: this.editInitiativeForm.value,
+      })
+      .subscribe(() => {
+        console.log('updated');
+      });
   }
 }

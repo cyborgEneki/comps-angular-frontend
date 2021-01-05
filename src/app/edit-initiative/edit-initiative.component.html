@@ -5,6 +5,17 @@
             <input matInput type="text" formControlName="name">
         </mat-form-field>
         <br>
+        <mat-form-field appearance="fill" class="edit-initative-form-field--width">
+            <mat-label>Select Goal Team</mat-label>
+            <mat-select [formControlName]="'goalTeam'">
+                <mat-option *ngFor="let goalTeam of goalTeams | async" [value]="goalTeam._id">
+                    {{ goalTeam.name }}
+                </mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="stateFormControl.hasError('required')">State is required
+                        </mat-error> -->
+        </mat-form-field>
+        <br>
         <div class="edit-initiative-form-field-group d-flex">
             <mat-form-field appearance="fill" class="edit-initative-form-field--half-width mr-3">
                 <mat-label>Initiative Lead</mat-label>
