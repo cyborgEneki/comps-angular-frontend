@@ -8,11 +8,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class IndicatorComponent implements OnInit {
   indicatorForm = new FormGroup({
-    pathwayStatement: new FormControl(''),
-    indicatorDescription: new FormControl(''),
-    indicatorLabel: new FormControl(''),
-    indicatorUnits: new FormControl(''),
-    indicatorDataSource: new FormControl('')
+    statement: new FormControl(''),
+    description: new FormControl(''),
+    label: new FormControl(''),
+    units: new FormControl(''),
+    dataSource: new FormControl('')
   });
 
   onSubmit() {
