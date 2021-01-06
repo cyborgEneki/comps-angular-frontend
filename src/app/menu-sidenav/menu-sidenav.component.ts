@@ -12,7 +12,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { AppService } from '../app.service.service';
 import { DataInterface } from '../app.data';
 import { RouteStateService } from '../route-state.service';
-import { PathwayService } from '../pathway.service';
 
 const GET_INITIATIVES = gql`
   {

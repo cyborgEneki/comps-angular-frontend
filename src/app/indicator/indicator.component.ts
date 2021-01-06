@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
@@ -73,6 +73,15 @@ const UPDATE_INDICATOR = gql`
   }
 `;
 
+const DELETE_INDICATOR = gql`
+  mutation deleteIndicator($id: ID!) {
+    deleteIndicator(id: $id) {
+      _id
+      label
+    }
+  }
+`;
+
 const GET_INITIATIVE_INDICATOR = gql`
   query getIndicator($id: ID!) {
     indicator(_id: $id) {
@@ -109,7 +118,8 @@ export class IndicatorComponent implements OnInit {
   constructor(
     private apollo: Apollo,
     private _dataService: AppService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -164,7 +174,7 @@ export class IndicatorComponent implements OnInit {
 
     if (this.indicatorId) {
       this.indicatorForm.value.id = this.indicatorId;
-console.log(this.indicatorForm.value)
+
       this.apollo
         .mutate({
           mutation: UPDATE_INDICATOR,
@@ -191,5 +201,20 @@ console.log(this.indicatorForm.value)
         dataSource: '',
       });
     }
+  }
+
+  deleteIndicator() {
+    this.apollo
+      .mutate({
+        mutation: DELETE_INDICATOR,
+        variables: {
+          id: this.indicatorId,
+        },
+      })
+      .subscribe(() => {
+        this.router.navigate(['/']);
+
+        console.log('deleted');
+      });
   }
 }
