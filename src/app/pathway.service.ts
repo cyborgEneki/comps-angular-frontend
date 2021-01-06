@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { DataInterface } from './pathway';
+import { PathwayDataInterface } from './pathway';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PathwayService {
-  private _data: DataInterface[] = [];
+  private _data: PathwayDataInterface[] = [];
 
   constructor() {}
 
-  addData(item: DataInterface) {
+  addData(item: PathwayDataInterface) {
     this._data.push(item);
   }
 
-  getData(): DataInterface[] {
+  getData(): PathwayDataInterface[] {
     return this._data;
   }
 }

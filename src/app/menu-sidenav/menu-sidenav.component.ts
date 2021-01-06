@@ -11,7 +11,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 import { AppService } from '../app.service.service';
 import { DataInterface } from '../app.data';
+import { PathwayDataInterface } from '../pathway';
 import { RouteStateService } from '../route-state.service';
+import { PathwayService } from '../pathway.service';
 
 const GET_INITIATIVES = gql`
   {
@@ -34,29 +36,33 @@ const GET_INITIATIVES = gql`
 `;
 
 const GET_INITIATIVE_PATHWAY_INDICATORS = gql`
-  query initiativePathwayIndicators($initiative: String!) {
+  query getInitiativePathwayIndicators($initiative: String!) {
     initiativePathwayIndicators(initiative: $initiative) {
-      _id
-      statement,
-      description,
-      label,
-      units,
-      dataSource,
-      type
+      indicators {
+        _id
+        statement
+        description
+        label
+        units
+        dataSource
+        type
+      }
     }
   }
 `;
 
 const GET_INITIATIVE_OUTCOME_INDICATORS = gql`
-  query initiativePathwayIndicators($initiative: String!) {
-    initiativePathwayIndicators(initiative: $initiative) {
-      _id
-      statement,
-      description,
-      label,
-      units,
-      dataSource,
-      type
+  query getOutcomePathwayIndicators($initiative: String!) {
+    initiativeOutcomeIndicators(initiative: $initiative) {
+      indicators {
+        _id
+        statement
+        description
+        label
+        units
+        dataSource
+        type
+      }
     }
   }
 `;
@@ -74,13 +80,15 @@ export class MenuSidenavComponent {
   isNotHomepage: boolean = false;
   indicatorType?: string;
   pathParam!: Observable<string>;
+  indicatorPathways?: object[];
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private apollo: Apollo,
     private router: Router,
     private _dataService: AppService,
-    private routeStateService: RouteStateService
+    private routeStateService: RouteStateService,
+    private _pathwayDataService: PathwayService
   ) {}
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -122,15 +130,39 @@ export class MenuSidenavComponent {
         },
       })
       .subscribe(({ data }: any) => {
-        if (data) {
-          console.log(data);
+        if (data.initiativePathwayIndicators.indicators) {
+          this.indicatorPathways = data.initiativePathwayIndicators.indicators;
         }
-      });
-    // const currentItem: DataInterface = {
-    //   indicatorType: this.indicatorType,
-    // };
 
-    // this._dataService.addData(currentItem);
+        // pathwayArray.map((pathway : any) => {
+        //   const currentItem: PathwayDataInterface = {
+        //     _id: pathway._id,
+        //     statement: pathway.statement,
+        //     description: pathway.description,
+        //     label: pathway.label,
+        //     units: pathway.units,
+        //     dataSource: pathway.dataSource,
+        //     type: pathway.type
+        //   };
+        //   this._pathwayDataService.addData(currentItem);
+        // })
+      });
+
+    this.apollo
+      .query({
+        query: GET_INITIATIVE_OUTCOME_INDICATORS,
+        variables: {
+          initiative: initiative._id,
+        },
+      })
+      .subscribe(({ data }: any) => {
+        // const currentItem: DataInterface = {
+        //   indicatorType: this.indicatorType,
+        // };
+
+        // this._dataService.addData(currentItem);
+        // console.log(data.initiativeOutcomeIndicators.indicators, 'tes');
+      });
   }
 
   displayPathwayCreateForm() {

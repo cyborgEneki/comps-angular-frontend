@@ -4,7 +4,8 @@
         <mat-toolbar class="sidenav--border-bottom">
             <ul class="list-unstyled mt-4">
                 <li>
-                    <a class="cursor-pointer link-text--no-decoration text-decoration-none" (click)=redirectToHomePage()>COMPS</a>
+                    <a class="cursor-pointer link-text--no-decoration text-decoration-none"
+                        (click)=redirectToHomePage()>COMPS</a>
                 </li>
             </ul>
         </mat-toolbar>
@@ -24,21 +25,23 @@
                 <div class="sidenav-menu-item" id="sidenav-menu-item-pathway">
                     <a mat-list-item (click)="displayPathwayCreateForm()">
                         <span class="w-50">Pathway</span>
-                        <span> 
+                        <span>
                             <i class="fas fa-plus-circle ml-3"></i>
                         </span>
                     </a>
-                    <!-- <div class="d-flex sidenav-menu-item__sub-item-group">
-                    <a href="#" class="sidenav-menu-item__sub-item">test</a>
-                    <a href="#" class="sidenav-menu-item__sub-item">test</a>
-                    <a href="#" class="sidenav-menu-item__sub-item">test</a>
-                </div> -->
+
+                    <div *ngIf="indicatorPathways?.length">
+                        <div class="d-flex sidenav-menu-item__sub-item-group" *ngFor="let pathway of indicatorPathways">
+                            <a href="#" class="sidenav-menu-item__sub-item">{{ pathway.label }} <i class="fas fa-minus-circle ml-3" (click)="deleteIndicator()"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <div class="sidenav-menu-item" id="sidenav-menu-item-outcome">
                     <a mat-list-item href="#">
                         <span class="w-50 ">Outcome</span>
                         <span>
-                            <a href="" routerLink="create-indicator" routerLinkActive="active"><i class="fas fa-plus-circle ml-3"></i></a>
+                            <a href="" routerLink="create-indicator" routerLinkActive="active"><i
+                                    class="fas fa-plus-circle ml-3"></i></a>
                         </span>
                     </a>
                     <div class="d-flex sidenav-menu-item__sub-item-group">
