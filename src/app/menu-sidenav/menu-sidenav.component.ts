@@ -148,9 +148,9 @@ export class MenuSidenavComponent {
   }
 
   displayPathwayCreateForm() {
-    this.router.navigate([
-      '/initiative/create-indicator',
+    this.router.navigate(['/initiative/create-indicator',
       this.pathParam.source._value,
+      'pathway',
     ]);
 
     this.indicatorType = 'P';
@@ -162,13 +162,29 @@ export class MenuSidenavComponent {
     this._dataService.addData(currentItem);
   }
 
+  displayOutcomeCreateForm() {
+    this.router.navigate([
+      '/initiative/create-indicator',
+      this.pathParam.source._value,
+      'outcome',
+    ]);
+
+    this.indicatorType = 'O';
+
+    const currentItem: DataInterface = {
+      indicatorType: this.indicatorType,
+    };
+
+    this._dataService.addData(currentItem);
+  }
+
   displayPathway(pathwayId: string) {
     this.isNotHomepage = true;
-    this.router.navigate(['/initiative/edit-pathway', pathwayId, 'pathway']);
+    this.router.navigate(['/initiative/edit-pathway', pathwayId]);
   }
 
   displayOutcome(outcomeId: string) {
     this.isNotHomepage = true;
-    this.router.navigate(['/initiative/edit-outcome', outcomeId, 'outcome']);
+    this.router.navigate(['/initiative/edit-outcome', outcomeId]);
   }
 }

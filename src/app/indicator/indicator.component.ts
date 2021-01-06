@@ -69,9 +69,10 @@ export class IndicatorComponent implements OnInit {
   });
 
   initiativeId: any;
-  initiativeType: any;
   indicatorId: any;
   indicator: any;
+  indicatorType: any;
+  indicatorCreateFormType: any;
 
   constructor(
     private apollo: Apollo,
@@ -82,20 +83,20 @@ export class IndicatorComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.initiativeId = params.get('initiativeId');
+      this.indicatorCreateFormType = params.get('indicatorCreateFormType');
     });
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.get('pathwayId') !== null) {
         this.indicatorId = params.get('pathwayId');
+        this.indicatorType = 'Pathway';
       }
       if (params.get('outcomeId') !== null) {
         this.indicatorId = params.get('outcomeId');
+        this.indicatorType = 'Outcome';
       }
-      this.initiativeType = params.get('initiativeId');
     });
 
-
-    console.log(this.indicatorId, 'tet');
     this.findIndicator();
     //add delete
   }
@@ -116,7 +117,7 @@ export class IndicatorComponent implements OnInit {
             description: this.indicator.description,
             label: this.indicator.label,
             units: this.indicator.units,
-            dataSource: this.indicator.dataSource
+            dataSource: this.indicator.dataSource,
           });
         }
       });

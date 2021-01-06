@@ -11,15 +11,15 @@ const routes: Routes = [
     component: EditInitiativeComponent,
   },
   {
-    path: 'initiative/create-indicator/:initiativeId',
+    path: 'initiative/create-indicator/:initiativeId/:indicatorCreateFormType',
     component: IndicatorComponent,
   },
   {
-    path: 'initiative/edit-pathway/:pathwayId/:indicatorType',
+    path: 'initiative/edit-pathway/:pathwayId',
     component: IndicatorComponent,
   },
   {
-    path: 'initiative/edit-outcome/:outcomeId/:indicatorType',
+    path: 'initiative/edit-outcome/:outcomeId',
     component: IndicatorComponent,
   },
 ];

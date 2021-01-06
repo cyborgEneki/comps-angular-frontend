@@ -1,4 +1,12 @@
 <div class="ml-3 mt-2">
+    <div *ngIf="indicatorId" class="indicator-form__heading">
+        Edit {{ indicatorType }}
+    </div>
+
+    <div *ngIf="initiativeId" class="indicator-form__heading">
+        Create <span *ngIf="indicatorCreateFormType === 'pathway'">{{ indicatorType }}</span><span *ngIf="indicatorCreateFormType === 'outcome'">{{ indicatorType }}</span>
+    </div>
+
     <form [formGroup]="indicatorForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill" class="indicator-form-field--width">
             <mat-label>Pathway Statement</mat-label>
