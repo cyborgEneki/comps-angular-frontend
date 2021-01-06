@@ -180,11 +180,23 @@ export class MenuSidenavComponent {
 
   displayPathway(pathwayId: string) {
     this.isNotHomepage = true;
+    this.indicatorType = 'P';
+    const currentItem: DataInterface = {
+      indicatorType: this.indicatorType,
+    };
+
+    this._dataService.addData(currentItem);
     this.router.navigate(['/initiative/edit-pathway', pathwayId]);
   }
 
   displayOutcome(outcomeId: string) {
     this.isNotHomepage = true;
+    this.indicatorType = 'O';
+    const currentItem: DataInterface = {
+      indicatorType: this.indicatorType,
+    };
+
+    this._dataService.addData(currentItem);
     this.router.navigate(['/initiative/edit-outcome', outcomeId]);
   }
 }

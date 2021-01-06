@@ -41,6 +41,38 @@ const CREATE_INDICATOR = gql`
   }
 `;
 
+const UPDATE_INDICATOR = gql`
+  mutation updateIndicator(
+    $id: ID!
+    $statement: String!
+    $description: String!
+    $label: String!
+    $units: String!
+    $dataSource: String!
+    $type: String!
+  ) {
+    updateIndicator(
+      indicatorInput: {
+        id: $id
+        statement: $statement
+        description: $description
+        label: $label
+        units: $units
+        dataSource: $dataSource
+        type: $type
+      }
+    ) {
+      _id
+      statement
+      description
+      label
+      units
+      dataSource
+      type
+    }
+  }
+`;
+
 const GET_INITIATIVE_INDICATOR = gql`
   query getIndicator($id: ID!) {
     indicator(_id: $id) {
@@ -100,7 +132,7 @@ export class IndicatorComponent implements OnInit {
         this.findIndicator();
       }
     });
-    console.log(this.indicatorCreateFormType)
+    console.log(this.indicatorCreateFormType);
     //add delete
   }
 
@@ -130,21 +162,34 @@ export class IndicatorComponent implements OnInit {
     this.indicatorForm.value.type = this._dataService.getData()[0].indicatorType;
     this.indicatorForm.value.initiative = this.initiativeId;
 
-    this.apollo
-      .mutate({
-        mutation: CREATE_INDICATOR,
-        variables: this.indicatorForm.value,
-      })
-      .subscribe(() => {
-        console.log('created');
-      });
+    if (this.indicatorId) {
+      this.indicatorForm.value.id = this.indicatorId;
+console.log(this.indicatorForm.value)
+      this.apollo
+        .mutate({
+          mutation: UPDATE_INDICATOR,
+          variables: this.indicatorForm.value,
+        })
+        .subscribe(() => {
+          console.log('updated');
+        });
+    } else {
+      this.apollo
+        .mutate({
+          mutation: CREATE_INDICATOR,
+          variables: this.indicatorForm.value,
+        })
+        .subscribe(() => {
+          console.log('created');
+        });
 
-    this.indicatorForm.setValue({
-      statement: '',
-      description: '',
-      label: '',
-      units: '',
-      dataSource: '',
-    });
+      this.indicatorForm.setValue({
+        statement: '',
+        description: '',
+        label: '',
+        units: '',
+        dataSource: '',
+      });
+    }
   }
 }
