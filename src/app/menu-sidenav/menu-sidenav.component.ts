@@ -184,7 +184,13 @@ export class MenuSidenavComponent {
     this._dataService.addData(currentItem);
   }
 
-  deleteIndicator() {
-    console.log('delete this');
+  displayPathway(pathwayId: string) {
+    this.isNotHomepage = true;
+    this.router.navigate(['/initiative/edit-pathway', pathwayId, 'pathway']);
+  }
+
+  displayOutcome(outcomeId: string) {
+    this.isNotHomepage = true;
+    this.router.navigate(['/initiative/edit-outcome', outcomeId, 'outcome']);
   }
 }

@@ -41,6 +41,19 @@ const CREATE_INDICATOR = gql`
   }
 `;
 
+const GET_INITIATIVE_INDICATOR = gql`
+  query getIndicator($id: ID!) {
+    indicator(_id: $id) {
+      _id
+      statement
+      description
+      label
+      units
+      dataSource
+    }
+  }
+`;
+
 @Component({
   selector: 'app-indicator',
   templateUrl: './indicator.component.html',
@@ -56,6 +69,9 @@ export class IndicatorComponent implements OnInit {
   });
 
   initiativeId: any;
+  initiativeType: any;
+  indicatorId: any;
+  indicator: any;
 
   constructor(
     private apollo: Apollo,
@@ -67,6 +83,43 @@ export class IndicatorComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.initiativeId = params.get('initiativeId');
     });
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      if (params.get('pathwayId') !== null) {
+        this.indicatorId = params.get('pathwayId');
+      }
+      if (params.get('outcomeId') !== null) {
+        this.indicatorId = params.get('outcomeId');
+      }
+      this.initiativeType = params.get('initiativeId');
+    });
+
+
+    console.log(this.indicatorId, 'tet');
+    this.findIndicator();
+    //add delete
+  }
+
+  findIndicator() {
+    this.apollo
+      .query({
+        query: GET_INITIATIVE_INDICATOR,
+        variables: {
+          id: this.indicatorId,
+        },
+      })
+      .subscribe(({ data }: any) => {
+        if (data.indicator) {
+          this.indicator = data.indicator;
+          this.indicatorForm.setValue({
+            statement: this.indicator.statement,
+            description: this.indicator.description,
+            label: this.indicator.label,
+            units: this.indicator.units,
+            dataSource: this.indicator.dataSource
+          });
+        }
+      });
   }
 
   onSubmit() {
@@ -81,13 +134,13 @@ export class IndicatorComponent implements OnInit {
       .subscribe(() => {
         console.log('created');
       });
-    
+
     this.indicatorForm.setValue({
       statement: '',
       description: '',
       label: '',
       units: '',
-      dataSource: ''
+      dataSource: '',
     });
   }
 }

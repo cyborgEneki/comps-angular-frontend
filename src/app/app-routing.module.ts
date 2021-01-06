@@ -14,6 +14,14 @@ const routes: Routes = [
     path: 'initiative/create-indicator/:initiativeId',
     component: IndicatorComponent,
   },
+  {
+    path: 'initiative/edit-pathway/:pathwayId/:indicatorType',
+    component: IndicatorComponent,
+  },
+  {
+    path: 'initiative/edit-outcome/:outcomeId/:indicatorType',
+    component: IndicatorComponent,
+  },
 ];
 
 @NgModule({
