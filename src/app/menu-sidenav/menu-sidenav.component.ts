@@ -81,6 +81,7 @@ export class MenuSidenavComponent {
   indicatorType?: string;
   pathParam!: Observable<string>;
   indicatorPathways?: object[];
+  indicatorOutcomes?: object[];
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -156,6 +157,9 @@ export class MenuSidenavComponent {
         },
       })
       .subscribe(({ data }: any) => {
+        if (data.initiativeOutcomeIndicators.indicators) {
+          this.indicatorOutcomes = data.initiativeOutcomeIndicators.indicators;
+        }
         // const currentItem: DataInterface = {
         //   indicatorType: this.indicatorType,
         // };

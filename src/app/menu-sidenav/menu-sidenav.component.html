@@ -32,7 +32,8 @@
 
                     <div *ngIf="indicatorPathways?.length">
                         <div class="d-flex sidenav-menu-item__sub-item-group" *ngFor="let pathway of indicatorPathways">
-                            <a href="#" class="sidenav-menu-item__sub-item">{{ pathway.label }} <i class="fas fa-minus-circle ml-3" (click)="deleteIndicator()"></i></a>
+                            <a href="#" class="sidenav-menu-item__sub-item">{{ pathway.label }} <i
+                                    class="fas fa-minus-circle ml-3" (click)="deleteIndicator()"></i></a>
                         </div>
                     </div>
                 </div>
@@ -44,11 +45,11 @@
                                     class="fas fa-plus-circle ml-3"></i></a>
                         </span>
                     </a>
-                    <div class="d-flex sidenav-menu-item__sub-item-group">
-                        <a href="#" class="sidenav-menu-item__sub-item">test <i class="fas fa-minus-circle ml-3"
-                                (click)="deleteIndicator()"></i></a>
-                        <a href="#" class="sidenav-menu-item__sub-item">test</a>
-                        <a href="#" class="sidenav-menu-item__sub-item">test</a>
+                    <div *ngIf="indicatorOutcomes?.length">
+                        <div class="d-flex sidenav-menu-item__sub-item-group" *ngFor="let outcome of indicatorOutcomes">
+                            <a href="#" class="sidenav-menu-item__sub-item">{{ outcome.label }} <i class="fas fa-minus-circle ml-3"
+                                    (click)="deleteIndicator()"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
