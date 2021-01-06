@@ -11,7 +11,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 import { AppService } from '../app.service.service';
 import { DataInterface } from '../app.data';
-import { PathwayDataInterface } from '../pathway';
 import { RouteStateService } from '../route-state.service';
 import { PathwayService } from '../pathway.service';
 
@@ -88,8 +87,7 @@ export class MenuSidenavComponent {
     private apollo: Apollo,
     private router: Router,
     private _dataService: AppService,
-    private routeStateService: RouteStateService,
-    private _pathwayDataService: PathwayService
+    private routeStateService: RouteStateService
   ) {}
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -121,7 +119,6 @@ export class MenuSidenavComponent {
   displayInitiativeData(initiative: any) {
     this.isNotHomepage = true;
     this.router.navigate(['/edit-initiative', initiative._id]);
-    // Return all indicators and store in service
 
     this.apollo
       .query({
@@ -134,19 +131,6 @@ export class MenuSidenavComponent {
         if (data.initiativePathwayIndicators.indicators) {
           this.indicatorPathways = data.initiativePathwayIndicators.indicators;
         }
-
-        // pathwayArray.map((pathway : any) => {
-        //   const currentItem: PathwayDataInterface = {
-        //     _id: pathway._id,
-        //     statement: pathway.statement,
-        //     description: pathway.description,
-        //     label: pathway.label,
-        //     units: pathway.units,
-        //     dataSource: pathway.dataSource,
-        //     type: pathway.type
-        //   };
-        //   this._pathwayDataService.addData(currentItem);
-        // })
       });
 
     this.apollo
@@ -160,12 +144,6 @@ export class MenuSidenavComponent {
         if (data.initiativeOutcomeIndicators.indicators) {
           this.indicatorOutcomes = data.initiativeOutcomeIndicators.indicators;
         }
-        // const currentItem: DataInterface = {
-        //   indicatorType: this.indicatorType,
-        // };
-
-        // this._dataService.addData(currentItem);
-        // console.log(data.initiativeOutcomeIndicators.indicators, 'tes');
       });
   }
 
