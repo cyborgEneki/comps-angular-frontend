@@ -37,11 +37,10 @@
                     </div>
                 </div>
                 <div class="sidenav-menu-item" id="sidenav-menu-item-outcome">
-                    <a mat-list-item href="#">
+                    <a mat-list-item (click)="displayOutcomeCreateForm()">
                         <span class="w-50 ">Outcome</span>
                         <span>
-                            <a href="" routerLink="create-indicator" routerLinkActive="active"><i
-                                    class="fas fa-plus-circle ml-3"></i></a>
+                            <i class="fas fa-plus-circle ml-3"></i>
                         </span>
                     </a>
                     <div *ngIf="indicatorOutcomes?.length">

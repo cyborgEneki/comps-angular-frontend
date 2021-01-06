@@ -100,6 +100,7 @@ export class IndicatorComponent implements OnInit {
         this.findIndicator();
       }
     });
+    console.log(this.indicatorCreateFormType)
     //add delete
   }
 

@@ -4,32 +4,32 @@
     </div>
 
     <div *ngIf="initiativeId" class="indicator-form__heading">
-        Create <span *ngIf="indicatorCreateFormType === 'pathway'">{{ indicatorType }}</span><span *ngIf="indicatorCreateFormType === 'outcome'">{{ indicatorType }}</span>
+        Create {{ indicatorCreateFormType }}
     </div>
 
     <form [formGroup]="indicatorForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill" class="indicator-form-field--width">
-            <mat-label>Pathway Statement</mat-label>
+            <mat-label>Statement</mat-label>
             <textarea matInput type="text" formControlName="statement"></textarea>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill" class="indicator-form-field--width">
-            <mat-label>Indicator Description</mat-label>
+            <mat-label>Description</mat-label>
             <textarea matInput type="text" formControlName="description"></textarea>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill" class="indicator-form-field--width">
-            <mat-label>Indicator Label</mat-label>
+            <mat-label>Label</mat-label>
             <input matInput type="text" formControlName="label">
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill" class="indicator-form-field--width">
-            <mat-label>Indicator Units</mat-label>
+            <mat-label>Units</mat-label>
             <input matInput type="text" formControlName="units">
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill" class="indicator-form-field--width">
-            <mat-label>Indicator Data Source</mat-label>
+            <mat-label>Data Source</mat-label>
             <input matInput type="text" formControlName="dataSource">
         </mat-form-field>
         <button mat-raised-button class="float-right mr-3" type="submit">Save</button>
