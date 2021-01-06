@@ -95,9 +95,11 @@ export class IndicatorComponent implements OnInit {
         this.indicatorId = params.get('outcomeId');
         this.indicatorType = 'Outcome';
       }
-    });
 
-    this.findIndicator();
+      if (this.indicatorId) {
+        this.findIndicator();
+      }
+    });
     //add delete
   }
 
